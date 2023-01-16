@@ -117,3 +117,4 @@ dmypy.json
 *.idea
 
 *.pytest_cache
+/tests/unit/tmp_data/

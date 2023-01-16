@@ -1,8 +1,12 @@
 # Spec 1. Upload a large file via HTTP Request 2. Write to DB   3.???
-
+import json
 import logging
+import time
+import uuid
+from datetime import datetime
 import requests
 from pathlib import Path
+import asyncio
 
 home = str(Path.home())
 
@@ -10,7 +14,7 @@ home = str(Path.home())
 logging.basicConfig(level=logging.INFO)
 
 
-def upload_file(file_name: str = None) -> str:
+async def upload_file(file_name: str = None) -> dict:
     """
     Function to call the API via the Requests Library
     :param file_name: Filename, Str
@@ -21,11 +25,15 @@ def upload_file(file_name: str = None) -> str:
             "file": open(file_name, 'rb'),
         }
         endpoint = "https://api.anonfiles.com/upload"
+        logging.info(f"Uploading File `{file_name}` to Server...")
         response = requests.post(endpoint, files=files)
+        await asyncio.sleep(3)  # TODO REMOVE
         response_json = response.json()
-        logging.info(f"Response from API: {response_json}")
+        logging.debug(f"Response from API: {response_json}")
         if response.status_code in (200, 201) \
                 and response_json["status"] is True:
+
+            logging.info(f"File `{file_name}` successfully uploaded to Server!!!")
             return response_json
         response.raise_for_status()
     except requests.exceptions.HTTPError as errh:
@@ -38,4 +46,25 @@ def upload_file(file_name: str = None) -> str:
         logging.error(err)
 
 
-upload_file(file_name=f"{home}/sample.jpeg")
+async def save_to_disk() -> None:
+    sample = {
+        "Value": str(uuid.uuid4()),
+        "Time": str(datetime.utcnow())
+    }
+    with open(f"./tests/unit/tmp_data/{str(uuid.uuid4())}.json", 'w', encoding='utf-8') as f:
+        json.dump(sample, f, ensure_ascii=False, indent=4)
+    logging.info("Data Saved to Disk!!!")
+
+
+async def main():
+    print("Started")
+    task1 = asyncio.create_task(upload_file(file_name=f"{home}/sample.jpeg"))
+    task2 = asyncio.create_task(save_to_disk())
+
+    value_task1 = await task1
+    value_task2 = await task2
+    print("Finished")
+
+asyncio.run(main())
+
+# save_to_disk()
