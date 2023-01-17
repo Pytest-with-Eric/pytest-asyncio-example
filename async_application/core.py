@@ -46,25 +46,28 @@ async def upload_file(file_name: str = None) -> dict:
         logging.error(err)
 
 
-async def save_to_disk() -> None:
+async def save_to_disk() -> bool:
+    status = False
     sample = {
         "Value": str(uuid.uuid4()),
         "Time": str(datetime.utcnow())
     }
     with open(f"./tests/unit/tmp_data/{str(uuid.uuid4())}.json", 'w', encoding='utf-8') as f:
         json.dump(sample, f, ensure_ascii=False, indent=4)
-    logging.info("Data Saved to Disk!!!")
+        logging.info("Data Saved to Disk!!!")
+        status = True
+    return status
 
 
-async def main():
-    print("Started")
-    task1 = asyncio.create_task(upload_file(file_name=f"{home}/sample.jpeg"))
-    task2 = asyncio.create_task(save_to_disk())
-
-    value_task1 = await task1
-    value_task2 = await task2
-    print("Finished")
-
-asyncio.run(main())
+# async def main():
+#     print("Started")
+#     task1 = asyncio.create_task(upload_file(file_name=f"{home}/sample.jpeg"))
+#     task2 = asyncio.create_task(save_to_disk())
+#
+#     value_task1 = await task1
+#     value_task2 = await task2
+#     print("Finished")
+#
+# asyncio.run(main())
 
 # save_to_disk()
