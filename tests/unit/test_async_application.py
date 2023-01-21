@@ -5,6 +5,7 @@ from async_application.core import upload_file, save_to_disk
 
 home = str(Path.home())
 
+
 @pytest.mark.asyncio
 async def test_upload_file():
     result_upload = await upload_file(file_name=f"{home}/sample.jpeg")
@@ -19,13 +20,19 @@ async def test_save_to_disk():
 
 @pytest.mark.asyncio
 async def test_main():
-    print("Started")
     task1 = asyncio.create_task(upload_file(file_name=f"{home}/sample.jpeg"))
     task2 = asyncio.create_task(save_to_disk())
 
     value_task1 = await task1
     value_task2 = await task2
-    print("Finished")
 
-    # asyncio.run(main())
+    assert value_task1["status"] is True
+    assert value_task2 is True
 
+
+@pytest.mark.asyncio
+async def test_async_app_client(async_app_client):
+    task1 = asyncio.create_task(async_app_client.get_cat_fact())
+
+    value_task1 = await task1
+    print(value_task1)
