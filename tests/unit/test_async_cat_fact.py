@@ -23,9 +23,9 @@ def mock_thing() -> AsyncMock:
     :return:
     """
     mock_thing = AsyncMock()
-    mock_thing.CatFact.get_cat_fact = AsyncMock(return_value='Mother cats '
-                                                             'teach their kittens '
-                                                             'to use the litter box.')
+    mock_thing.CatFact.get_cat_fact = AsyncMock(
+        return_value="Mother cats " "teach their kittens " "to use the litter box."
+    )
     return mock_thing
 
 

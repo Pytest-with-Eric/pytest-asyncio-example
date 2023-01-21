@@ -18,7 +18,7 @@ async def upload_file(file_name: str = None) -> dict:
     """
     try:
         files = {
-            "file": open(file_name, 'rb'),
+            "file": open(file_name, "rb"),
         }
         endpoint = "https://api.anonfiles.com/upload"
         logging.info(f"Uploading File `{file_name}` to Server...")
@@ -26,8 +26,7 @@ async def upload_file(file_name: str = None) -> dict:
         await asyncio.sleep(3)  # TODO REMOVE
         response_json = response.json()
         logging.debug(f"Response from API: {response_json}")
-        if response.status_code in (200, 201) \
-                and response_json["status"] is True:
+        if response.status_code in (200, 201) and response_json["status"] is True:
             logging.info(f"File `{file_name}` successfully uploaded to Server!!!")
             return response_json
         response.raise_for_status()
@@ -46,11 +45,10 @@ async def save_to_disk() -> bool:
     Function to save a dict to disk as a JSON file
     :return: Bool
     """
-    sample = {
-        "Value": str(uuid.uuid4()),
-        "Time": str(datetime.utcnow())
-    }
-    with open(f"./tests/unit/tmp_data/{str(uuid.uuid4())}.json", 'w', encoding='utf-8') as f:
+    sample = {"Value": str(uuid.uuid4()), "Time": str(datetime.utcnow())}
+    with open(
+        f"./tests/unit/tmp_data/{str(uuid.uuid4())}.json", "w", encoding="utf-8"
+    ) as f:
         json.dump(sample, f, ensure_ascii=False, indent=4)
         logging.info("Data Saved to Disk!!!")
         status = True
