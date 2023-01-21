@@ -7,19 +7,31 @@ home = str(Path.home())
 
 
 @pytest.mark.asyncio
-async def test_upload_file():
+async def test_upload_file() -> None:
+    """
+    Function to test the Upload File Method
+    :return: None
+    """
     result_upload = await upload_file(file_name=f"{home}/sample.jpeg")
     assert result_upload["status"] is True
 
 
 @pytest.mark.asyncio
-async def test_save_to_disk():
+async def test_save_to_disk() -> None:
+    """
+    Function to test the Save to Disk Method
+    :return: None
+    """
     result_save = await save_to_disk()
     assert result_save is True
 
 
 @pytest.mark.asyncio
-async def test_main():
+async def test_main() -> None:
+    """
+    Function to test the above 2 methods
+    :return: None
+    """
     task1 = asyncio.create_task(upload_file(file_name=f"{home}/sample.jpeg"))
     task2 = asyncio.create_task(save_to_disk())
 

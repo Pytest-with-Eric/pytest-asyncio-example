@@ -28,7 +28,6 @@ async def upload_file(file_name: str = None) -> dict:
         logging.debug(f"Response from API: {response_json}")
         if response.status_code in (200, 201) \
                 and response_json["status"] is True:
-
             logging.info(f"File `{file_name}` successfully uploaded to Server!!!")
             return response_json
         response.raise_for_status()
@@ -43,7 +42,10 @@ async def upload_file(file_name: str = None) -> dict:
 
 
 async def save_to_disk() -> bool:
-    status = False
+    """
+    Function to save a dict to disk as a JSON file
+    :return: Bool
+    """
     sample = {
         "Value": str(uuid.uuid4()),
         "Time": str(datetime.utcnow())
