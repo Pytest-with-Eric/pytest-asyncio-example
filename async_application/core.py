@@ -1,11 +1,9 @@
-# Spec 1. Upload a large file via HTTP Request 2. Write to DB   3.???
+# Spec 1. Upload a large file via HTTP Request 2. Write to Disk
 import json
 import logging
-import time
 import uuid
 from datetime import datetime
 import requests
-from pathlib import Path
 import asyncio
 
 # Set Logging

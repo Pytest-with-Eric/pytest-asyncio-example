@@ -28,11 +28,3 @@ async def test_main():
 
     assert value_task1["status"] is True
     assert value_task2 is True
-
-
-@pytest.mark.asyncio
-async def test_async_app_client(async_app_client):
-    task1 = asyncio.create_task(async_app_client.get_cat_fact())
-
-    value_task1 = await task1
-    print(value_task1)

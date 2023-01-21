@@ -3,7 +3,7 @@ import logging
 import requests
 
 
-class AsyncApp:
+class CatFact:
     def __init__(self):
         self.base_url = "https://meowfacts.herokuapp.com/"
 
