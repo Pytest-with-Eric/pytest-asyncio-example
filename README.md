@@ -1,8 +1,6 @@
 # Pytest Asyncio Example
 
-[//]: # (This repo contains the sample code for the article - [How To Avoid Hanging Tests Using Pytest Timeout &#40;And Save Compute Resource&#41;)
-[//]: # (]&#40;https://pytest-with-eric.com/pytest-best-practices/pytest-timeout/&#41;)
-
+This repo contains the sample code for the article - [3 Ways To Easily Test Your Python Async Functions With Pytest Asyncio](https://pytest-with-eric.com/pytest-advanced/pytest-asyncio/)
 
 # Requirements
 * Python (3.10.6)

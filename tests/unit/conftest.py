@@ -1,4 +1,3 @@
-import pytest
 import pytest_asyncio
 from async_application.cat_fact import CatFact
 
