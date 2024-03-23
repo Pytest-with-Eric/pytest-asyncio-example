@@ -1,13 +1,14 @@
 import json
 import logging
 import requests
+import asyncio
 
 
 class CatFact:
     def __init__(self):
         self.base_url = "https://meowfacts.herokuapp.com/"
 
-    async def get_cat_fact(self) -> tuple[int, dict] | str:
+    async def get_cat_fact(self):
         """
         Function to get a Cat Fact from Rest API
         :return: JSON Encoded Response String
@@ -26,3 +27,13 @@ class CatFact:
             logging.error(errt)
         except requests.exceptions.RequestException as err:
             logging.error(err)
+
+
+async def main():
+    async_cat_fact = CatFact()
+    status, result = await async_cat_fact.get_cat_fact()
+    print(result, status)
+
+
+if __name__ == "__main__":
+    asyncio.run(main())
