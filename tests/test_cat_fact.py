@@ -1,5 +1,4 @@
 import pytest
-import asyncio
 import pytest_asyncio
 from asyncmock import AsyncMock
 from async_examples.cat_fact import CatFact
